@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "LegalSearch",
+  "short_name": "LegalSearch",
+  "version": "1.1.0",
+  "version_name": "1.1.0 RC2",
+  "description": "Local semantic search in the open PDF. The document never leaves this computer.",
+  "minimum_chrome_version": "116",
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "action": {
+    "default_title": "LegalSearch: search this PDF",
+    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }
+  },
+  "side_panel": { "default_path": "sidepanel.html" },
+  "background": { "service_worker": "background.js", "type": "module" },
+  "permissions": ["sidePanel", "nativeMessaging", "tabs", "storage"],
+  "host_permissions": ["http://*/*", "https://*/*", "file:///*"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+  }
+}

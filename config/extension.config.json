@@ -1,0 +1,7 @@
+{
+  "_comment": "Single source of truth for the extension identity. See docs/architecture.md#extension-id.",
+  "hostName": "com.legalsearch.host",
+  "extensionId": "aghlapimpmjmelpaonikjigcgneineob",
+  "manifestKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyi5zCkCW2ZTfhzYHympZQKAzJNu2cXkNIwpByEiMw7eVxjHnOd8jMCbbwenheNEAJH9og2k/JUPzz540l05E41W7EQBVAy1mC8rkYpv+9hV55DxH5TTzGBYr451ICwkYBOHC8HjZVasgz/msKfecwW/oPEkTGzfTXLPQOmL+UsG6ANn4xTdOAbOMfTOkf/xI32LoNvLGawNtYQjDoRY3Ux56YWColQLZsaMg1IUVx8o4KUOpfnNCCCY9L9X+dYnoEEKSYbePmmqkepyBZ4X3tRTL4EJz8pa1/5XsbMEQXUKgMaTcu/unS+2vQGzQtD2ZcdMNFdk86aUlAwBcgTlohQIDAQAB",
+  "webStoreUrl": ""
+}

@@ -1,0 +1,85 @@
+{
+  "title": "Sentencia de prueba LegalSearch (ficticia)",
+  "pages": [
+    "CONSEJO DE ESTADO. SALA DE LO CONTENCIOSO ADMINISTRATIVO. SECCIÓN TERCERA. Radicación: 05001-23-31-000-2014-01234-01. Medio de control: reparación directa. Demandantes: María Fernanda Rojas y otros. Demandado: Nación, Ministerio de Defensa, Policía Nacional. Asunto: recurso de apelación contra la sentencia de primera instancia. Documento ficticio elaborado únicamente para pruebas de software; los nombres y hechos son inventados.",
+    "I. ANTECEDENTES. Mediante escrito radicado el 14 de marzo de 2014, los familiares del señor Julián Andrés Rojas presentaron demanda con el fin de que se declarara patrimonialmente responsable a la entidad demandada por su muerte, ocurrida el 2 de abril de 2012 en zona rural del municipio. Relataron que el occiso era líder comunal, que había denunciado la presencia de grupos armados en la vereda y que, pocos días después de esas denuncias, fue interceptado en la carretera y asesinado frente a su vivienda.",
+    "II. LA OMISIÓN EN EL DEBER DE PROTECCIÓN. Obran en el expediente tres oficios radicados por la víctima ante la estación del municipio, en los cuales describía las intimidaciones recibidas y solicitaba acompañamiento. Las autoridades tenían conocimiento previo de la situación de riesgo y omitieron adoptar medidas razonables. Ninguna de esas solicitudes recibió respuesta y no se asignó esquema alguno de seguridad. Para la Sala, esta inactividad configura una falla en la prestación del servicio que compromete la responsabilidad de la administración.",
+    "III. CADUCIDAD DEL MEDIO DE CONTROL. El artículo 164 del Código de Procedimiento Administrativo dispone que la pretensión de reparación directa deberá presentarse dentro del término de dos años, contados a partir del día siguiente al de la ocurrencia de la acción u omisión causante del daño. Como la muerte ocurrió el 2 de abril de 2012 y la demanda se radicó el 14 de marzo de 2014, la Sala concluye que fue interpuesta oportunamente, antes del vencimiento del plazo legal.",
+    "IV. PERJUICIOS MORALES. Siguiendo la sentencia de unificación de 2014, en casos de muerte se reconoce a los padres, cónyuge o compañero permanente e hijos del fallecido una indemnización equivalente a cien salarios mínimos legales mensuales vigentes, y a los hermanos cincuenta salarios. La aflicción, la tristeza y la congoja de los parientes cercanos se presumen a partir del parentesco acreditado con los registros civiles aportados.",
+    "V. VALORACIÓN DE LA PRUEBA TESTIMONIAL. Los vecinos que rindieron declaración coincidieron en las circunstancias de tiempo, modo y lugar. Sus relatos son espontáneos, coherentes y concordantes entre sí, por lo que ofrecen plena convicción al juzgador. No se advierte interés en las resultas del proceso ni contradicciones que resten fuerza a lo narrado. La contraparte no tachó a ninguno de los deponentes.",
+    "VI. LEGITIMACIÓN EN LA CAUSA. Se acreditó con los registros civiles de nacimiento y matrimonio la relación de parentesco de los demandantes con el fallecido, de manera que se encuentran legitimados por activa. Por pasiva, la Policía Nacional es la institución a la cual corresponde, según la Constitución, mantener las condiciones necesarias para el ejercicio de los derechos y libertades públicas.",
+    "VII. DEBIDO PROCESO. La parte demandada alegó que no fue notificada en debida forma del auto admisorio. Sin embargo, obra constancia de envío del mensaje de datos al buzón electrónico para notificaciones judiciales de la entidad, así como su contestación dentro del término. Por consiguiente, no existe irregularidad que afecte el derecho de defensa ni que genere nulidad de lo actuado.",
+    "VIII. PERJUICIOS MATERIALES. En cuanto al lucro cesante, se demostró que el señor Rojas trabajaba como agricultor y percibía un salario mínimo mensual, suma de la cual destinaba una parte al sostenimiento de su compañera y de sus dos hijos menores. Se liquidará un período consolidado, desde la fecha de los hechos hasta la de esta providencia, y uno futuro, calculado según la vida probable del occiso y la mayoría de edad de los hijos.",
+    "IX. COSTAS. De conformidad con el artículo 188 del Código de Procedimiento Administrativo, la condena en costas no procede de manera automática, sino que exige verificar la conducta de las partes. Como no se advierte temeridad ni mala fe en el ejercicio del derecho de contradicción de la entidad vencida, la Sala se abstendrá de imponerlas en esta instancia.",
+    "X. DECISIÓN. En mérito de lo expuesto, la Sala de lo Contencioso Administrativo, administrando justicia en nombre de la República y por autoridad de la ley, FALLA: PRIMERO. Modificar la sentencia apelada. SEGUNDO. Declarar administrativa y patrimonialmente responsable a la Nación, Ministerio de Defensa, Policía Nacional. TERCERO. Condenar al pago de los perjuicios reconocidos en la parte motiva. CUARTO. Devolver el expediente al tribunal de origen.",
+    "SALVAMENTO DE VOTO. Con el acostumbrado respeto, me aparto de la decisión mayoritaria. En mi criterio, las pruebas no permitían establecer que las amenazas tuvieran la entidad suficiente para exigir una protección especial, ni que el homicidio fuera previsible. Considero que debió negarse la totalidad de las pretensiones, porque el resultado dañoso obedeció al hecho exclusivo de un tercero."
+  ],
+  "queries": [
+    {
+      "q": "el Estado sabía del peligro pero no hizo nada",
+      "page": 3,
+      "target": "Las autoridades tenían conocimiento previo de la situación de riesgo y omitieron adoptar medidas razonables.",
+      "noSharedWords": true
+    },
+    {
+      "q": "¿Dónde se habla de que el Estado conocía previamente el riesgo?",
+      "page": 3
+    },
+    {
+      "q": "cuánto plazo había para acudir al juez",
+      "page": 4
+    },
+    {
+      "q": "dinero por el dolor sufrido por la familia",
+      "page": 5
+    },
+    {
+      "q": "credibilidad de quienes vieron lo sucedido",
+      "page": 6
+    },
+    {
+      "q": "ganancias que el muerto ya no pudo obtener",
+      "page": 9
+    },
+    {
+      "q": "quién paga los gastos del juicio",
+      "page": 10
+    },
+    {
+      "q": "un magistrado no estuvo de acuerdo",
+      "page": 12
+    },
+    {
+      "q": "qué le pasó al líder de la comunidad",
+      "page": 2
+    },
+    {
+      "q": "los parientes pueden reclamar porque demostraron su vínculo familiar",
+      "page": 7
+    },
+    {
+      "q": "la entidad dice que no fue enterada de la demanda",
+      "page": 8
+    },
+    {
+      "q": "resultado final del caso y órdenes del tribunal",
+      "page": 11
+    },
+    {
+      "q": "número del expediente y partes del proceso",
+      "page": 1
+    },
+    {
+      "q": "hubo amenazas y pidió ayuda a la policía sin recibir respuesta",
+      "page": 3
+    },
+    {
+      "q": "la muerte fue culpa de un tercero y no del Estado",
+      "page": 12
+    },
+    {
+      "q": "cuánto dinero reciben los hermanos del fallecido",
+      "page": 5
+    }
+  ]
+}

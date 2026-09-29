@@ -1,0 +1,73 @@
+name: Bug report
+description: Something does not work as expected (installation, side panel, indexing, navigation, uninstall).
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Do not upload confidential PDFs, queries or excerpts.** Only attach a PDF if you are authorized to share it
+        publicly. Security vulnerabilities must be reported privately — see SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: LegalSearch version
+      description: Extension version in chrome://extensions, or `LegalSearch.exe --version`.
+      placeholder: 1.1.0 RC2
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 24H2
+    validations:
+      required: true
+  - type: input
+    id: chrome
+    attributes:
+      label: Chrome version
+      description: chrome://version
+      placeholder: "153.0.8010.53"
+    validations:
+      required: true
+  - type: dropdown
+    id: source
+    attributes:
+      label: PDF source
+      options:
+        - Web (http/https)
+        - Local file (file://)
+        - Both / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open ...
+        2. Click the LegalSearch icon ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include the exact message shown in the panel, if any.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (optional)
+      description: |
+        Relevant lines from `%LOCALAPPDATA%\LegalSearch\logs\legalsearch.log`. The log never contains document text or
+        queries, but it can contain local file paths — review before posting.
+      render: text

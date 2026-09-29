@@ -1,0 +1,3 @@
+# Keep the existing long-line style of the codebase.
+max_width = 120
+use_small_heuristics = "Max"

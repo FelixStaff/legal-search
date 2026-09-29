@@ -1,0 +1,4 @@
+# Static CRT: LegalSearch.exe itself needs no Visual C++ runtime installed.
+# (onnxruntime.dll ships with app-local VC++ DLLs, see scripts/fetch-runtime.ps1)
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]

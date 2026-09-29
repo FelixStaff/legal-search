@@ -1,0 +1,93 @@
+name: Release
+
+# Builds release artifacts from a version tag (v1.1.0, v1.2.0, v1.1.0-rc1, ...).
+#
+# Publishing is DISABLED by default: the "publish" job only runs when the
+# repository variable PUBLISH_RELEASES is set to "true" (Settings → Secrets and
+# variables → Actions → Variables), and even then it creates a DRAFT release
+# that must be reviewed and published by hand.
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build release artifacts
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Verify version consistency with the tag
+        run: node scripts/check-version.mjs "${{ github.ref_name }}"
+
+      - name: Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Inno Setup
+        shell: powershell
+        run: |
+          if (-not (Test-Path "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe")) {
+            choco install innosetup --no-progress -y
+          }
+
+      # Fetches the pinned model/runtime (SHA-256 verified), runs every automated
+      # test (Rust, extension, engine end-to-end), builds the engine, extension
+      # and installer, and writes dist/SHA256SUMS.txt.
+      - name: Build and test
+        shell: powershell
+        run: ./scripts/build-all.ps1
+
+      # Code signing hook (not configured). When a certificate is available, sign
+      # dist/LegalSearchSetup.exe (and LegalSearch.exe before packaging) here,
+      # then regenerate SHA256SUMS.txt. Never commit certificates; use secrets.
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: legalsearch-${{ github.ref_name }}
+          if-no-files-found: error
+          path: |
+            dist/LegalSearchSetup.exe
+            dist/legalsearch-extension-store.zip
+            dist/SHA256SUMS.txt
+
+  publish:
+    name: Create draft GitHub Release (opt-in)
+    needs: build
+    if: ${{ vars.PUBLISH_RELEASES == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: legalsearch-${{ github.ref_name }}
+          path: assets
+
+      - name: Verify checksums
+        working-directory: assets
+        run: sha256sum -c SHA256SUMS.txt
+
+      - name: Create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          prerelease=""
+          case "$TAG" in *-*) prerelease="--prerelease" ;; esac
+          gh release create "$TAG" --draft $prerelease --verify-tag \
+            --title "LegalSearch ${TAG#v}" \
+            --notes "See CHANGELOG.md. Verify downloads with SHA256SUMS.txt." \
+            assets/LegalSearchSetup.exe assets/legalsearch-extension-store.zip assets/SHA256SUMS.txt

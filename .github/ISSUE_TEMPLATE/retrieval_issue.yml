@@ -1,0 +1,60 @@
+name: Retrieval quality issue
+description: A search did not find the passage you expected, or ranked it too low.
+labels: [retrieval]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ Do not submit confidential legal material to a public GitHub issue.
+        Only include queries, page numbers and excerpts that you are allowed to publish. If the material is
+        confidential, describe the case in general terms instead (e.g. "query about the limitation period; the
+        answer was on page 4; LegalSearch returned pages 11 and 1").
+  - type: textarea
+    id: query
+    attributes:
+      label: Query
+      description: The text you searched for (or a paraphrase if it is confidential).
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected page / passage
+      description: Where the answer actually is. Quote the passage only if it is safe to publish.
+    validations:
+      required: true
+  - type: textarea
+    id: returned
+    attributes:
+      label: Returned pages
+      description: The pages LegalSearch returned, in order (e.g. 11, 1, 5, ...).
+    validations:
+      required: true
+  - type: dropdown
+    id: safe
+    attributes:
+      label: Is it safe to share the excerpts above publicly?
+      options:
+        - "Yes — the document is public or I am authorized to share it"
+        - "No — I described the case without confidential text"
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Retrieval mode (if known)
+      description: Shown as `retrievalMode` in an exported evaluation file. Default is dense.
+      options:
+        - dense (default)
+        - hybrid (LEGALSEARCH_HYBRID=1)
+        - not sure
+  - type: input
+    id: version
+    attributes:
+      label: LegalSearch version
+      placeholder: 1.1.0 RC2
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: Language of the document, document length, whether the PDF is a scan, etc.

@@ -1,0 +1,20 @@
+{
+  "name": "legalsearch-extension",
+  "version": "1.1.0",
+  "private": true,
+  "description": "LegalSearch Chrome extension (side panel). Talks only to the local LegalSearch engine via Native Messaging.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node build.mjs --tests && node --test build-tests/"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.3.2",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "pdfjs-dist": "6.3.289"
+  }
+}

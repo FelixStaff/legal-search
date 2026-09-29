@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LegalSearch</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header>
+    <h1>Search this document</h1>
+    <p id="doc" class="doc" aria-live="polite"></p>
+  </header>
+
+  <form id="search-form" role="search" autocomplete="off">
+    <label for="query" class="visually-hidden">Query</label>
+    <input id="query" type="search" maxlength="1000" placeholder="e.g. the State knew about the risk and did nothing" disabled>
+    <button id="search-btn" type="submit" disabled>Search</button>
+  </form>
+
+  <section id="status" class="status" role="status" aria-live="polite" hidden>
+    <p id="status-text" class="status-text"></p>
+    <div id="progress" class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" hidden>
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+    <p id="status-detail" class="status-detail" hidden></p>
+    <button id="status-action" type="button" class="secondary" hidden></button>
+  </section>
+
+  <h2 id="results-title" class="results-title" hidden>Results</h2>
+  <ol id="results" class="results"></ol>
+
+  <section id="missing" class="missing" hidden>
+    <button id="missing-open" type="button" class="link">Missing result?</button>
+    <form id="missing-form" class="missing-form" hidden>
+      <p class="missing-title">The passage you were looking for is not in the results</p>
+      <label>Page where it is (optional) <input id="missing-page" type="number" min="1" step="1" inputmode="numeric"></label>
+      <label>Note (optional) <input id="missing-note" type="text" maxlength="1000"></label>
+      <div class="row"><button type="submit">Save</button><button id="missing-cancel" type="button" class="secondary">Cancel</button></div>
+    </form>
+    <p id="missing-done" class="saved" hidden></p>
+  </section>
+
+  <section id="feedback-bar" class="feedback-bar" title="Feedback is optional and stays on this computer unless you export it.">
+    <button id="export-btn" type="button" class="link" disabled>Export evaluation data (0)</button>
+    <button id="delete-btn" type="button" class="link danger" hidden>Delete</button>
+  </section>
+
+  <footer>
+    <svg aria-hidden="true" viewBox="0 0 16 16" width="12" height="12"><path fill="currentColor" d="M8 1a3.5 3.5 0 0 0-3.5 3.5V6H4a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-.5V4.5A3.5 3.5 0 0 0 8 1Zm2 5H6V4.5a2 2 0 1 1 4 0V6Z"/></svg>
+    Local processing. The document never leaves this computer.
+  </footer>
+
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>

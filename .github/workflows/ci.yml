@@ -1,0 +1,127 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1" # weekly, to catch newly published dependency advisories
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and test (Windows)
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: native
+
+      - name: Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: extension/package-lock.json
+
+      # Pinned, SHA-256-verified build inputs (same scripts as local builds).
+      - name: Cache model and ONNX Runtime
+        uses: actions/cache@v6
+        with:
+          path: |
+            models/current
+            native/runtime
+          key: model-runtime-${{ hashFiles('scripts/fetch-model.ps1', 'scripts/fetch-runtime.ps1') }}
+
+      - name: Fetch model and runtime
+        shell: powershell
+        run: |
+          ./scripts/fetch-model.ps1
+          ./scripts/fetch-runtime.ps1
+
+      - name: Version consistency
+        run: node scripts/check-version.mjs
+
+      - name: Rust formatting
+        working-directory: native
+        run: cargo fmt --check
+
+      - name: Rust build
+        working-directory: native
+        run: cargo build --release --locked
+
+      - name: Rust tests (unit, real-model semantic/retrieval evaluation, tokenizer equivalence)
+        working-directory: native
+        run: cargo test --release --locked
+
+      - name: Test fixtures
+        run: node scripts/make-fixture.mjs
+
+      - name: Extension install
+        working-directory: extension
+        run: npm ci --no-audit --no-fund
+
+      - name: Extension typecheck
+        working-directory: extension
+        run: npx tsc --noEmit -p .
+
+      - name: Extension tests
+        working-directory: extension
+        run: npm test
+
+      - name: Extension build (development and Chrome Web Store packages)
+        working-directory: extension
+        run: |
+          node build.mjs --store
+          node build.mjs
+
+      - name: Engine end-to-end test (Native Messaging protocol)
+        run: node scripts/e2e-host.mjs --dev
+
+  audit:
+    name: Dependency audit
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install cargo-audit
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-audit
+
+      # Fails on known vulnerabilities. Accepted informational advisories are
+      # listed with their justification in native/.cargo/audit.toml.
+      - name: cargo audit
+        working-directory: native
+        run: cargo audit
+
+      - name: Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      # Production dependencies (bundled into the extension) must be clean.
+      - name: npm audit (production dependencies)
+        working-directory: extension
+        run: npm audit --omit=dev --audit-level=moderate
+
+      # Build-only tooling: reported for review, does not block.
+      - name: npm audit (all dependencies, informational)
+        working-directory: extension
+        continue-on-error: true
+        run: npm audit

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LegalSearch · Turn on in Chrome</title>
+<style>
+  :root { --fg:#1f2328; --muted:#5f6670; --line:#e3e6ea; --card:#f7f8fa; --accent:#1d4ed8; --bg:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --fg:#e8eaed; --muted:#a3a8b0; --line:#3a3c41; --card:#2a2b2f; --accent:#8ab4f8; --bg:#1f2023; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 "Segoe UI", system-ui, sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:32px 20px 48px; }
+  h1 { font-size:26px; margin:0 0 6px; }
+  .lead { color:var(--muted); margin:0 0 28px; }
+  ol { padding:0; list-style:none; counter-reset:s; display:grid; gap:14px; }
+  li { counter-increment:s; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px 14px 56px; position:relative; }
+  li::before { content:counter(s); position:absolute; left:16px; top:14px; width:26px; height:26px; border-radius:50%;
+    background:var(--accent); color:#fff; font-weight:700; display:grid; place-items:center; font-size:14px; }
+  code { font:14px Consolas, monospace; background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:3px 7px; word-break:break-all; }
+  button { font:inherit; font-size:13px; margin-left:8px; padding:3px 10px; border-radius:6px; border:1px solid var(--line); background:var(--bg); color:var(--accent); cursor:pointer; }
+  .note { color:var(--muted); font-size:14px; margin-top:6px; }
+  h2 { font-size:18px; margin:32px 0 10px; }
+  .store { display:none; }
+  .privacy { margin-top:32px; padding:12px 16px; border-left:3px solid var(--accent); background:var(--card); border-radius:6px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Turn on LegalSearch in Google Chrome</h1>
+  <p class="lead">The program is installed. One last step remains, and you only do it once.</p>
+
+  <div class="store" id="store">
+    <ol>
+      <li>Open the LegalSearch page in the Chrome Web Store: <a id="store-link" href="#">install the extension</a>.</li>
+      <li>Click <strong>Add to Chrome</strong>.</li>
+      <li>If you work with PDFs saved on your computer: in <code>chrome://extensions</code>, open LegalSearch's <strong>Details</strong> and turn on <strong>Allow access to file URLs</strong>.</li>
+    </ol>
+  </div>
+
+  <div id="manual">
+    <ol>
+      <li>In Chrome, type <code>chrome://extensions</code><button data-copy="chrome://extensions">Copy</button> in the address bar and press Enter.</li>
+      <li>Turn on <strong>Developer mode</strong> (switch in the top-right corner).</li>
+      <li>Click <strong>Load unpacked</strong> and choose this folder:<br>
+        <code id="path">{{EXTENSION_PATH}}</code><button data-copy-from="path">Copy</button>
+        <div class="note">You can paste the path into the top bar of the folder picker.</div></li>
+      <li>On the <strong>LegalSearch</strong> card, click <strong>Details</strong> and turn on <strong>Allow access to file URLs</strong>.
+        <div class="note">Needed to search PDFs saved on your computer.</div></li>
+      <li>Click Chrome's puzzle-piece icon and pin <strong>LegalSearch</strong>.</li>
+    </ol>
+  </div>
+
+  <h2>Everyday use</h2>
+  <p>Open a PDF in Chrome, click the LegalSearch icon and type what you are looking for in your own words.
+     The first time you open a document it takes a few seconds to prepare; after that it is ready instantly.</p>
+
+  <p class="privacy"><strong>Local processing.</strong> The document never leaves this computer.
+     LegalSearch does not use the Internet, has no accounts and sends no data to anyone.</p>
+
+  <h2>Uninstall</h2>
+  <p>Windows Settings → Apps → LegalSearch → Uninstall. Remove the extension in <code>chrome://extensions</code> → Remove.</p>
+</main>
+<script>
+  const store = '{{WEBSTORE_URL}}';
+  if (store && store.startsWith('https://chromewebstore.google.com/')) {
+    document.getElementById('store').style.display = 'block';
+    document.getElementById('manual').style.display = 'none';
+    document.getElementById('store-link').href = store;
+  }
+  for (const b of document.querySelectorAll('button')) {
+    b.addEventListener('click', async () => {
+      const text = b.dataset.copy ?? document.getElementById(b.dataset.copyFrom).textContent;
+      try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; }
+      catch { b.textContent = 'Select and copy'; }
+      setTimeout(() => (b.textContent = 'Copy'), 1800);
+    });
+  }
+</script>
+</body>
+</html>

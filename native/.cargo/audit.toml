@@ -1,0 +1,7 @@
+# cargo-audit configuration (https://github.com/rustsec/rustsec/tree/main/cargo-audit)
+[advisories]
+# RUSTSEC-2024-0436 "paste - no longer maintained" (informational, not a vulnerability).
+# `paste` is a compile-time proc-macro reached only through the `tokenizers`
+# dev-dependency, which is used exclusively by tests/tokenizer_equiv.rs as a
+# reference implementation. It is not compiled into LegalSearch.exe.
+ignore = ["RUSTSEC-2024-0436"]
